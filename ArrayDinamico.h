@@ -55,6 +55,8 @@ public:
         }
     }
 
+    //metodo que nos devuelve la primera posicion de memoria del array para poder interactuar con el
+
     T* primeraDireccion(){
         return this->arrayPtr;
     }
