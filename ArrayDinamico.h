@@ -55,6 +55,8 @@ public:
         }
     }
 
+    //metodo que nos devuelve la primera posicion de memoria del array para poder interactuar con el
+
     T* primeraDireccion(){
         return this->arrayPtr;
     }
@@ -65,7 +67,7 @@ public:
     // utilizado como uno de sus operandos
 
     //sobrecargamos el operador []
-    T operator[](int index) const {
+    T& operator[](int index) const {
         return arrayPtr[index];
     }
 
