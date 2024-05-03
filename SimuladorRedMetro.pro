@@ -7,10 +7,12 @@ SOURCES += \
         estacion.cpp \
         linea.cpp \
         main.cpp \
+        menu.cpp \
         red.cpp
 
 HEADERS += \
     ArrayDinamico.h \
     estacion.h \
     linea.h \
+    menu.h \
     red.h
