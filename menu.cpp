@@ -54,10 +54,13 @@ void menu_principal(Red redMetro){
             //funcion que pregunta que nombre se le va a colocar a la estacion
             nombreEstacion = validarNombreEstacion(*linea);
             transferStation = validateSetIsTransferStation();
-            //ahora que validamos el nombre debemos de agregar ese objeto a la linea
+
+            linea->mostrarEstaciones();
+            //funcion que lo que va a hacer es , si no hay estaciones entonces no va a hacer nada , si hay una estacion va a decir entre
 
             linea->anadirEstacion(nombreEstacion,transferStation);
             cout<<"Estacion creada con exito \n";
+
             linea->mostrarEstaciones();
 
 

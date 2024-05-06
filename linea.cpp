@@ -32,7 +32,13 @@ int* Linea::getTiempoEntreEstaciones(){
 void Linea::anadirEstacion(string nombre, bool setTransferStation){
     //para añadir la estacion tengo que recibir la linea ,
     //creamos la linea y ahora la metemos al arreglo de lineas de la red
-    this->estaciones.anadir(Estacion (nombre , setTransferStation));
+    if(this->estaciones.obtenerTamaño() == 0){
+         this->estaciones.anadir(Estacion (nombre , setTransferStation));
+    }else if(this->estaciones.obtenerTamaño() == 1){
+
+    }
+
+
 
 }
 
