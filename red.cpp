@@ -24,6 +24,7 @@ void Red::mostrarLineas(){
 void Red::anadirLinea(char nombre){
     //creamos la linea y ahora la metemos al arreglo de lineas de la red
     this->lineas.anadir(Linea (nombre));
+    this->numLineas++;
 }
 
 

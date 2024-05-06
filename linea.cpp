@@ -41,8 +41,11 @@ void Linea::mostrarEstaciones(){
         cout<<estaciones[i].getNombre();
     }
 }
+<<<<<<< HEAD
 
 
 int Linea::numEstaciones(){
     return this->estaciones.obtenerTamaño();
 }
+=======
+>>>>>>> 9d7f34a1fc61a9cba5e9bcc75fd9b8278b2d0628
