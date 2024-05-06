@@ -67,7 +67,7 @@ public:
     // utilizado como uno de sus operandos
 
     //sobrecargamos el operador []
-    T operator[](int index) const {
+    T& operator[](int index) const {
         return arrayPtr[index];
     }
 

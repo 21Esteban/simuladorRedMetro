@@ -9,15 +9,16 @@ class Estacion
 
 private:
     string nombre;
-    string categoria;
+    bool isTransferStation;
 
 public:
     Estacion();
     //sobrecarga de constructor
-    Estacion(string nombre , string categoria);
+    Estacion(string nombre , bool isTransferStation);
 
     string getNombre() const;
     string getCategoria() const;
+    bool getIsTransferStation() const ;
 };
 
 #endif // ESTACION_H

@@ -29,6 +29,14 @@ int* Linea::getTiempoEntreEstaciones(){
 }
 
 
+void Linea::anadirEstacion(string nombre, bool setTransferStation){
+    //para añadir la estacion tengo que recibir la linea ,
+    //creamos la linea y ahora la metemos al arreglo de lineas de la red
+    this->estaciones.anadir(Estacion (nombre , setTransferStation));
+
+}
+
+
 
 void Linea::mostrarEstaciones(){
 
@@ -37,7 +45,15 @@ void Linea::mostrarEstaciones(){
         return;
     }
 
+    cout<<"Lista de estaciones asociadas a la linea " <<this->getNombre();
+
     for(int i = 0; i<estaciones.obtenerTamaño();i++){
-        cout<<estaciones[i].getNombre();
+        cout<<estaciones[i].getNombre()<<endl;
+
     }
+}
+
+
+int Linea::numEstaciones(){
+    return this->estaciones.obtenerTamaño();
 }
