@@ -39,6 +39,8 @@ public:
 
     //metodo para imprimir las estaciones
     void mostrarEstaciones();
+
+    void mostrarEstacionesYCostes();
 };
 
 #endif // LINEA_H

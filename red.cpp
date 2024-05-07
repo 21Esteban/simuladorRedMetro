@@ -40,7 +40,7 @@ Linea* Red::getLinea(char nombre){
     for(int i = 0; i<lineas.obtenerTamaño();i++){
         if(nombre == lineas[i].getNombre()){
             lineaPtr = &lineas[i];
-            cout<<lineaPtr->getNombre();
+            cout<<" \nLinea "<<lineaPtr->getNombre()<<" encontrada con exito ... \n" ;
             //cout<<&lineas[i]<<endl;
             return lineaPtr;
         }
