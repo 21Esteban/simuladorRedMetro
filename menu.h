@@ -13,6 +13,10 @@ using namespace std ;
 void menu_principal(Red redMetro);
 char validarNombreLinea();
 Linea *buscarLinea(Red& redmetro , bool opcion)
+
+//prototipo
+
+
 string validarNombreEstacion(Linea *lineaPtr);
 bool validateSetIsTransferStation();
 #endif // MENU_H

@@ -13,7 +13,9 @@ private:
 
 public:
     Estacion();
+
     //sobrecarga de constructor.
+
     Estacion(string nombre , bool isTransferStation);
 
     string getNombre() const;

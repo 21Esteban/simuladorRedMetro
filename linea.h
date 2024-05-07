@@ -18,9 +18,11 @@ public:
     char getNombre();
     //metodo para obtener las estaciones de las lineas (retorna la memoria del primer elemento del arreglo)
     Estacion* getEstaciones();
+
     //metodo para obtener una estacion;
 
     Estacion* getEstacion(string nombre);
+
 
     //anadirEstacion
 
@@ -31,6 +33,8 @@ public:
 
     //metodo que me retorna el numero de estaciones de la linea
 
+
+
     int numEstaciones();
 
 
@@ -39,7 +43,9 @@ public:
 
     void mostrarEstacionesYCostes();
 
+
     void eliminarEstacion(string nombre);
+
 };
 
 #endif // LINEA_H

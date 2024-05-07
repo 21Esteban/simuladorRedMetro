@@ -81,6 +81,7 @@ public:
     }
 
 
+
     void eliminarEn(int indice){
         //par apoder eliminar un indice lo que hacemos es copiar el arreglo nuevamente pero sin ese elemento y ya
 
@@ -106,6 +107,7 @@ public:
         size--;
 
     }
+
 
     int obtenerTamaño() const {
         return size;

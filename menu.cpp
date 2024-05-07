@@ -11,7 +11,9 @@ void menu_principal(Red redMetro){
     int opcion;
     char nombre;
     Linea *linea;
+
     Estacion *estacion;
+
     string nombreEstacion;
     bool transferStation;
 
@@ -46,7 +48,9 @@ void menu_principal(Red redMetro){
             // Aqui va el codigo para la opcion 2
             //funcion para validar la creacion de la estacion,
             redMetro.mostrarLineas();
+
             linea = buscarLinea(redMetro,true);
+
             if(linea == nullptr){
                 this_thread::sleep_for(chrono::seconds(2));
                 break;
@@ -111,14 +115,17 @@ char validarNombreLinea(){
     return nombre;
 }
 
+
  Linea *buscarLinea(Red& redmetro , bool opcion){
     char linea;
+
 
 
     if(redmetro.getNumeroDeLineas() == 0){
         cout<<"no puedes agregar estaciones porque no hay lineas en la red \n";
         return nullptr;
     }
+
 
     cout << "\n Ingrese la linea en la que desee " << (opcion ? "agregar" : "eliminar") << " una estacion \n";
     cin>>linea;
