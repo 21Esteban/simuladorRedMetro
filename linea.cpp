@@ -49,11 +49,11 @@ void Linea::anadirEstacion(string nombre, bool setTransferStation)
             cout << " \n Desea agregar la estacion entre en que posicion (las estacion en ese indice no sera eliminada , simplemente se desplazara hacia la derecha) \n";
             cin >> respuesta;
 
-            if (respuesta < 0 || respuesta > this->estaciones.obtenerTamaño() + 1)
+            if (respuesta <= 0 || respuesta > this->estaciones.obtenerTamaño() + 1)
             {
                 cout << "Indice no valido. Por favor, intente de nuevo.\n";
             }
-        } while (respuesta < 0 || respuesta > this->estaciones.obtenerTamaño() + 1);
+        } while (respuesta <= 0 || respuesta > this->estaciones.obtenerTamaño() + 1);
 
         // Si el usuario quiere añadir la estación al final
         if (respuesta == this->estaciones.obtenerTamaño() + 1)
@@ -113,11 +113,11 @@ void Linea::mostrarEstacionesYCostes()
 
     for (int i = 0; i < estaciones.obtenerTamaño(); i++)
     {
-        cout << estaciones[i].getNombre() << "(" << i << ")";
+        cout << estaciones[i].getNombre() ;
 
         // Solo muestra el coste si el índice es válido en tiempoEntreEstaciones
         if (i < tiempoEntreEstaciones.obtenerTamaño()) {
-            cout << "---" << this->tiempoEntreEstaciones[i] << "--- ";
+            cout << " --- " << this->tiempoEntreEstaciones[i] << " --- ";
         }
 
         //cout << "\n";
