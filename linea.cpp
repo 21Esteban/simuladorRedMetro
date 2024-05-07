@@ -29,19 +29,65 @@ int* Linea::getTiempoEntreEstaciones(){
 }
 
 
-void Linea::anadirEstacion(string nombre, bool setTransferStation){
-    //para añadir la estacion tengo que recibir la linea ,
-    //creamos la linea y ahora la metemos al arreglo de lineas de la red
-    if(this->estaciones.obtenerTamaño() == 0){
-         this->estaciones.anadir(Estacion (nombre , setTransferStation));
-    }else if(this->estaciones.obtenerTamaño() == 1){
+void Linea::anadirEstacion(string nombre, bool setTransferStation)
+{
+    short int respuesta;
+    short int tiempo;
 
+    // Si no hay estaciones, simplemente añade la nueva estación
+    if (this->estaciones.obtenerTamaño() == 0)
+    {
+        this->estaciones.anadir(Estacion(nombre, setTransferStation));
     }
+    else if (this->estaciones.obtenerTamaño() >= 1) // Si ya hay estaciones
+    {
+        this->mostrarEstaciones();
 
+        // Pregunta al usuario dónde quiere insertar la nueva estación
+        do
+        {
+            cout << " \n Desea agregar la estacion entre en que posicion (las estacion en ese indice no sera eliminada , simplemente se desplazara hacia la derecha) \n";
+            cin >> respuesta;
 
+            if (respuesta < 0 || respuesta > this->estaciones.obtenerTamaño() + 1)
+            {
+                cout << "Indice no valido. Por favor, intente de nuevo.\n";
+            }
+        } while (respuesta < 0 || respuesta > this->estaciones.obtenerTamaño() + 1);
 
+        // Si el usuario quiere añadir la estación al final
+        if (respuesta == this->estaciones.obtenerTamaño() + 1)
+        {
+            this->estaciones.anadir(Estacion(nombre, setTransferStation));
+            cout << "cual es el tiempo de recorrido entre la estacion " << this->estaciones[respuesta - 2].getNombre() << " y la estacion " << nombre << " : ";
+            cin >> tiempo;
+            this->tiempoEntreEstaciones.insertarEn(tiempo, respuesta-2);
+            return;
+        }
+        else // Si el usuario quiere insertar la estación en otra posición
+        {
+            this->estaciones.insertarEn(Estacion(nombre, setTransferStation), respuesta-1);
+        }
+
+        // Si la estación no es la primera, pregunta el tiempo de recorrido
+        if (respuesta > 1)
+        {
+            cout << "cual es el tiempo de recorrido entre la estacion " << this->estaciones[respuesta - 2].getNombre() << " y la estacion " << nombre << " : ";
+            cin >> tiempo;
+            this->tiempoEntreEstaciones.insertarEn(tiempo, respuesta-2);
+        }
+
+        // Pregunta el tiempo de recorrido hasta la siguiente estación
+        if (respuesta <= this->estaciones.obtenerTamaño())
+        {
+            cout << "cual es el tiempo de recorrido entre la estacion " << nombre << " y la estacion " << this->estaciones[respuesta].getNombre() << " : ";
+            cin >> tiempo;
+            this->tiempoEntreEstaciones.insertarEn(tiempo, respuesta-1);
+        }
+
+        //this->mostrarEstacionesYCostes();
+    }
 }
-
 
 
 void Linea::mostrarEstaciones(){
@@ -54,8 +100,27 @@ void Linea::mostrarEstaciones(){
     cout<<"Lista de estaciones asociadas a la linea " <<this->getNombre();
 
     for(int i = 0; i<estaciones.obtenerTamaño();i++){
-        cout<<estaciones[i].getNombre()<<endl;
+        cout<<"\n"<<estaciones[i].getNombre()<<"("<<i+1<<")"<< "   ";
 
+    }
+
+
+}
+
+void Linea::mostrarEstacionesYCostes()
+{
+    cout << "Lista de estaciones asociadas a la linea " << this->getNombre() << " con sus costes \n";
+
+    for (int i = 0; i < estaciones.obtenerTamaño(); i++)
+    {
+        cout << estaciones[i].getNombre() << "(" << i << ")";
+
+        // Solo muestra el coste si el índice es válido en tiempoEntreEstaciones
+        if (i < tiempoEntreEstaciones.obtenerTamaño()) {
+            cout << "---" << this->tiempoEntreEstaciones[i] << "--- ";
+        }
+
+        //cout << "\n";
     }
 }
 

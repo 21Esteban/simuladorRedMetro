@@ -4,6 +4,8 @@
 using namespace std;
 #include<iostream>
 
+
+
 template<class T>
 class ArrayDinamico
 {
@@ -20,9 +22,10 @@ public:
         this->size = 0;
     }
 
-    ~ArrayDinamico() {
+    /*~ArrayDinamico() {
+        cout<<"eliminando....";
         delete[] arrayPtr;
-    }
+    }*/
 
     //metodos para añadir un elemento a mi arreglo dinamico
 
@@ -37,9 +40,43 @@ public:
         //ahora agregamos el ultimo elemento al nuevo arreglo
         newArray[size] = elemento;
         delete[] arrayPtr;
+        //cout<<"acabo de eliminar el array viejo " ;
         // y ahora hacemos que el puntero arrayPtr apunte al nuevo arreglo
         arrayPtr = newArray;
         //y por ultimo modificamos el atributo de size
+        size++;
+    }
+
+    void insertarEn(T elemento, int indice) {
+        // Verifica si el índice es válido
+        /*if (indice < 0 || indice > size) {
+            cout << "Indice inválido. No se anadira el elemento." << endl;
+            return;
+        }*/
+
+        // Crea un nuevo arreglo dinámico del tamaño del arreglo que teníamos más 1 para poder insertar el nuevo elemento
+        T* newArray = new T[size + 1];
+
+        // Copia los elementos del arreglo viejo al nuevo hasta el índice
+        for (int i = 0; i < indice; i++) {
+            newArray[i] = arrayPtr[i];
+        }
+
+        // Inserta el nuevo elemento en el índice
+        newArray[indice] = elemento;
+
+        // Copia el resto de los elementos del arreglo viejo al nuevo
+        for (int i = indice; i < size; i++) {
+            newArray[i + 1] = arrayPtr[i];
+        }
+
+        // Libera la memoria del arreglo viejo
+        delete[] arrayPtr;
+
+        // Ahora hacemos que el puntero arrayPtr apunte al nuevo arreglo
+        arrayPtr = newArray;
+
+        // Por último, incrementamos el atributo de size
         size++;
     }
 

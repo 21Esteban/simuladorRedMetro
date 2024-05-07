@@ -15,7 +15,7 @@ void menu_principal(Red redMetro){
     bool transferStation;
 
     do {
-        system("cls");
+       // system("cls");
         cout << "Menu:\n";
         cout << "1. Agregar una linea\n";
         cout << "2. Agregar estacion\n";
@@ -52,19 +52,20 @@ void menu_principal(Red redMetro){
             }
 
             //funcion que pregunta que nombre se le va a colocar a la estacion
-            nombreEstacion = validarNombreEstacion(*linea);
+            nombreEstacion = validarNombreEstacion(linea);
             transferStation = validateSetIsTransferStation();
 
-            linea->mostrarEstaciones();
+           // linea->mostrarEstaciones();
+
             //funcion que lo que va a hacer es , si no hay estaciones entonces no va a hacer nada , si hay una estacion va a decir entre
 
             linea->anadirEstacion(nombreEstacion,transferStation);
             cout<<"Estacion creada con exito \n";
 
-            linea->mostrarEstaciones();
+            linea->mostrarEstacionesYCostes();
 
 
-           this_thread::sleep_for(chrono::seconds(4));
+           this_thread::sleep_for(chrono::seconds(2));
             break;
         case 3:
             cout << "Has seleccionado la opcion 3.\n";
@@ -94,7 +95,7 @@ char validarNombreLinea(){
         return nullptr;
     }
 
-    cout<<"Ingrese la linea en la que desee agregar una estacion \n";
+    cout<<"\n Ingrese la linea en la que desee agregar una estacion \n";
     cin>>linea;
 
     //ahora vamos a buscar la linea para ver si se pueden agregar estaciones
@@ -109,11 +110,10 @@ char validarNombreLinea(){
 }
 
 
-string validarNombreEstacion(Linea lineaPtr){
+string validarNombreEstacion(Linea *lineaPtr){
     string nombreEstacion;
     bool valido = false;
-    Estacion *PrimeraEstacion =  lineaPtr.getEstaciones();
-    cout<<PrimeraEstacion<<endl;
+    Estacion *PrimeraEstacion =  lineaPtr->getEstaciones();
 
     do{
         //validamos que el nombre de la estacion no se repite
@@ -122,12 +122,12 @@ string validarNombreEstacion(Linea lineaPtr){
 
         valido = true;
         Estacion *temp = PrimeraEstacion;
-        for(int i = 0 ; i < lineaPtr.numEstaciones() ; i++){
+        for(int i = 0 ; i < lineaPtr->numEstaciones() ; i++){
             if((temp + i)->getNombre() == nombreEstacion){
                 valido = false;
                 break;
             }
-        } // Esta es la llave de cierre que faltaba
+        }
 
     } while (!valido);
 
@@ -152,4 +152,6 @@ bool validateSetIsTransferStation(){
     return false; // Esta línea es necesaria para evitar una advertencia de que no todas las rutas de código devuelven un valor.
 }
 
+void mostrarIndicesDeEstaciones(Linea *lineaPtr){
 
+}
