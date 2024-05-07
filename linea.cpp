@@ -3,7 +3,7 @@
 //constructor por defecto
 
 Linea::Linea() {
-    this->nombre = ' ';  // o cualquier valor por defecto que quieras
+    this->nombre = ' ';  // o cualquier valor por defecto que quieras..
 }
 
 Linea::Linea(char nombre) {
@@ -23,11 +23,95 @@ Estacion* Linea::getEstaciones(){
 
 }
 
+
+
+void Linea::eliminarEstacion(string nombre){
+    //primero buscamos la estacion
+    for (int i = 0 ; i < this->estaciones.obtenerTamaño();i++){
+        if(nombre == estaciones[i].getNombre()){
+            // Si la estación a eliminar no es la primera ni la ultima sumamos los tiempos de recorrido
+            if (i > 0 && i < this->estaciones.obtenerTamaño() - 1) {
+                this->tiempoEntreEstaciones[i - 1] += this->tiempoEntreEstaciones[i];
+            }
+
+            // Eliminamos la estación y el tiempo de recorrido asociado
+            this->estaciones.eliminarEn(i);
+            if (i < this->tiempoEntreEstaciones.obtenerTamaño()) {
+                this->tiempoEntreEstaciones.eliminarEn(i);
+            }
+
+            return;
+        }
+    }
+
+    cout<<"No es posible eliminar esa estacion porque no existe . ";
+}
+
 int* Linea::getTiempoEntreEstaciones(){
     return this->tiempoEntreEstaciones.primeraDireccion();
 
 }
 
+
+void Linea::anadirEstacion(string nombre, bool setTransferStation)
+{
+    short int respuesta;
+    short int tiempo;
+
+    // Si no hay estaciones, simplemente añade la nueva estación
+    if (this->estaciones.obtenerTamaño() == 0)
+    {
+        this->estaciones.anadir(Estacion(nombre, setTransferStation));
+    }
+    else if (this->estaciones.obtenerTamaño() >= 1) // Si ya hay estaciones
+    {
+        this->mostrarEstaciones();
+
+        // Pregunta al usuario dónde quiere insertar la nueva estación
+        do
+        {
+            cout << " \n Desea agregar la estacion entre en que posicion (las estacion en ese indice no sera eliminada , simplemente se desplazara hacia la derecha) \n";
+            cin >> respuesta;
+
+            if (respuesta <= 0 || respuesta > this->estaciones.obtenerTamaño() + 1)
+            {
+                cout << "Indice no valido. Por favor, intente de nuevo.\n";
+            }
+        } while (respuesta <= 0 || respuesta > this->estaciones.obtenerTamaño() + 1);
+
+        // Si el usuario quiere añadir la estación al final
+        if (respuesta == this->estaciones.obtenerTamaño() + 1)
+        {
+            this->estaciones.anadir(Estacion(nombre, setTransferStation));
+            cout << "cual es el tiempo de recorrido entre la estacion " << this->estaciones[respuesta - 2].getNombre() << " y la estacion " << nombre << " : ";
+            cin >> tiempo;
+            this->tiempoEntreEstaciones.insertarEn(tiempo, respuesta-2);
+            return;
+        }
+        else // Si el usuario quiere insertar la estación en otra posición
+        {
+            this->estaciones.insertarEn(Estacion(nombre, setTransferStation), respuesta-1);
+        }
+
+        // Si la estación no es la primera, pregunta el tiempo de recorrido
+        if (respuesta > 1)
+        {
+            cout << "cual es el tiempo de recorrido entre la estacion " << this->estaciones[respuesta - 2].getNombre() << " y la estacion " << nombre << " : ";
+            cin >> tiempo;
+            this->tiempoEntreEstaciones.insertarEn(tiempo, respuesta-2);
+        }
+
+        // Pregunta el tiempo de recorrido hasta la siguiente estación
+        if (respuesta <= this->estaciones.obtenerTamaño())
+        {
+            cout << "cual es el tiempo de recorrido entre la estacion " << nombre << " y la estacion " << this->estaciones[respuesta].getNombre() << " : ";
+            cin >> tiempo;
+            this->tiempoEntreEstaciones.insertarEn(tiempo, respuesta-1);
+        }
+
+        //this->mostrarEstacionesYCostes();
+    }
+}
 
 
 void Linea::mostrarEstaciones(){
@@ -37,15 +121,34 @@ void Linea::mostrarEstaciones(){
         return;
     }
 
+    cout<<"Lista de estaciones asociadas a la linea " <<this->getNombre();
+
     for(int i = 0; i<estaciones.obtenerTamaño();i++){
-        cout<<estaciones[i].getNombre();
+        cout<<"\n"<<estaciones[i].getNombre()<<"("<<i+1<<")"<< "   ";
+
+    }
+
+
+}
+
+void Linea::mostrarEstacionesYCostes()
+{
+    cout << "Lista de estaciones asociadas a la linea " << this->getNombre() << " con sus costes \n";
+
+    for (int i = 0; i < estaciones.obtenerTamaño(); i++)
+    {
+        cout << estaciones[i].getNombre() ;
+
+        // Solo muestra el coste si el índice es válido en tiempoEntreEstaciones
+        if (i < tiempoEntreEstaciones.obtenerTamaño()) {
+            cout << " --- " << this->tiempoEntreEstaciones[i] << " --- ";
+        }
+
+        //cout << "\n";
     }
 }
-<<<<<<< HEAD
 
 
 int Linea::numEstaciones(){
     return this->estaciones.obtenerTamaño();
 }
-=======
->>>>>>> 9d7f34a1fc61a9cba5e9bcc75fd9b8278b2d0628

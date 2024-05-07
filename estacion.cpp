@@ -3,13 +3,12 @@
 
 Estacion::Estacion() {
     this->nombre =  ' ';
-    this->categoria = "normal";
+    this->isTransferStation = false;
 }
 
-Estacion::Estacion(string nombre , string categoria) {
+Estacion::Estacion(string nombre , bool isTransferStation) {
     this->nombre =  nombre;
-    //importante,,, Hay que hacer una validacion para la categoria , que solo se reciban los siguientes estados [normal,transferencia]
-    this->categoria = categoria;
+    this->isTransferStation = isTransferStation;
 }
 
 
@@ -17,6 +16,6 @@ string Estacion::getNombre() const {
     return this->nombre;
 }
 
-string Estacion::getCategoria() const {
-    return this->categoria;
+bool Estacion::getIsTransferStation() const {
+    return this->isTransferStation;
 }

@@ -4,6 +4,8 @@
 using namespace std;
 #include<iostream>
 
+
+
 template<class T>
 class ArrayDinamico
 {
@@ -20,14 +22,15 @@ public:
         this->size = 0;
     }
 
-    ~ArrayDinamico() {
+    /*~ArrayDinamico() {
+        cout<<"eliminando....";
         delete[] arrayPtr;
-    }
+    }*/
 
     //metodos para añadir un elemento a mi arreglo dinamico
 
     void anadir(T elemento) {
-        //creamos un nuevo arreglo dinamico del tamaño del arreglo que teniamos mas 1 para poder insetar el nuevo elemento
+        //creamos un nuevo arreglo dinamico del tamaño  del arreglo que teniamos mas 1 para poder insetar el nuevo elemento
         T* newArray = new T[size + 1];
         //copiamos el arreglo viejo al nuevo
         for (int i = 0; i < size; i++) {
@@ -37,10 +40,71 @@ public:
         //ahora agregamos el ultimo elemento al nuevo arreglo
         newArray[size] = elemento;
         delete[] arrayPtr;
+        //cout<<"acabo de eliminar el array viejo " ;
         // y ahora hacemos que el puntero arrayPtr apunte al nuevo arreglo
         arrayPtr = newArray;
         //y por ultimo modificamos el atributo de size
         size++;
+    }
+
+    void insertarEn(T elemento, int indice) {
+        // Verifica si el índice es válido
+        /*if (indice < 0 || indice > size) {
+            cout << "Indice inválido. No se anadira el elemento." << endl;
+            return;
+        }*/
+
+        // Crea un nuevo arreglo dinámico del tamaño del arreglo que teníamos más 1 para poder insertar el nuevo elemento
+        T* newArray = new T[size + 1];
+
+        // Copia los elementos del arreglo viejo al nuevo hasta el índice
+        for (int i = 0; i < indice; i++) {
+            newArray[i] = arrayPtr[i];
+        }
+
+        // Inserta el nuevo elemento en el índice
+        newArray[indice] = elemento;
+
+        // Copia el resto de los elementos del arreglo viejo al nuevo
+        for (int i = indice; i < size; i++) {
+            newArray[i + 1] = arrayPtr[i];
+        }
+
+        // Libera la memoria del arreglo viejo
+        delete[] arrayPtr;
+
+        // Ahora hacemos que el puntero arrayPtr apunte al nuevo arreglo
+        arrayPtr = newArray;
+
+        // Por último, incrementamos el atributo de size
+        size++;
+    }
+
+
+    void eliminarEn(int indice){
+        //par apoder eliminar un indice lo que hacemos es copiar el arreglo nuevamente pero sin ese elemento y ya
+
+        //creamos un nuevo arreglo dinamico con la misma cantidad del viejo -1
+        T* newArray = new T[this->obtenerTamaño()-1] ;
+
+        for (int i = 0, j = 0; i < this->obtenerTamaño(); i++){
+            // Ahora vamos copiando cada elemento del array viejo y lo pasamos al nuevo
+            if(i != indice){
+                newArray[j] = arrayPtr[i];
+                j++;
+            }
+        }
+
+        //por ultimo liberamos la memoria del arreglo viejo
+
+        delete[] arrayPtr;
+
+        //y ahora hacemos que apunte al nuevo Array
+
+        arrayPtr = newArray;
+
+        size--;
+
     }
 
     int obtenerTamaño() const {
