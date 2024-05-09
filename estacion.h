@@ -13,11 +13,10 @@ private:
 
 public:
     Estacion();
-    //sobrecarga de constructor.
+    //sobrecarga de constructor
     Estacion(string nombre , bool isTransferStation);
 
     string getNombre() const;
-    string getCategoria() const;
     bool getIsTransferStation() const ;
 };
 

@@ -3,6 +3,7 @@
 #include<string>
 #include"ArrayDinamico.h"
 #include"estacion.h"
+#include <ctime>
 using namespace std;
 
 class Linea
@@ -18,7 +19,7 @@ public:
     char getNombre();
     //metodo para obtener las estaciones de las lineas (retorna la memoria del primer elemento del arreglo)
     Estacion* getEstaciones();
-    //metodo para obtener una estacion;
+    //metodo para obtener una estacion ;
 
     Estacion* getEstacion(string nombre);
 
@@ -40,6 +41,10 @@ public:
     void mostrarEstacionesYCostes();
 
     void eliminarEstacion(string nombre);
+
+    //metodo para calcularTiempoDeLlegada
+
+    time_t calcularTiempoDeLlegada(string estacionSalida, string estacionLlegada, time_t horaSalida);
 };
 
 #endif // LINEA_H

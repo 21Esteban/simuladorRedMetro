@@ -12,7 +12,6 @@ private:
     int numLineas = 0;
     ArrayDinamico<Linea> lineas;
 
-
 public:
     Red(string nombre);
     string getNombre();
@@ -20,8 +19,9 @@ public:
     void setNombre(string nombre);
     void anadirLinea(char nombre);
     Linea* getLinea(char nombre);
+    Linea* getLineas();
     int getNumeroDeLineas();
-
+    void eliminarLinea(char nombre);
 };
 
 #endif // RED_H

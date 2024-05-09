@@ -3,7 +3,7 @@
 //constructor por defecto
 
 Linea::Linea() {
-    this->nombre = ' ';  // o cualquier valor por defecto que quieras..
+    this->nombre = ' ';  // o cualquier valor por defecto que quieras
 }
 
 Linea::Linea(char nombre) {
@@ -58,6 +58,7 @@ void Linea::anadirEstacion(string nombre, bool setTransferStation)
     short int respuesta;
     short int tiempo;
 
+
     // Si no hay estaciones, simplemente añade la nueva estación
     if (this->estaciones.obtenerTamaño() == 0)
     {
@@ -66,6 +67,7 @@ void Linea::anadirEstacion(string nombre, bool setTransferStation)
     else if (this->estaciones.obtenerTamaño() >= 1) // Si ya hay estaciones
     {
         this->mostrarEstaciones();
+        cout<<" \n si ingresa el num "<< this->estaciones.obtenerTamaño() + 1 <<" la estacion se agregara en la ultima posicion \n";
 
         // Pregunta al usuario dónde quiere insertar la nueva estación
         do
@@ -111,6 +113,10 @@ void Linea::anadirEstacion(string nombre, bool setTransferStation)
 
         //this->mostrarEstacionesYCostes();
     }
+
+
+
+    //ahora , si la estacion es una estacion de trnasferencia toca añadirla a otra linea por lo que le preguntamos que a que otra linea se va a añadir esta estacion y luego repetir este proceso como si estuvieramos añadiendo nuevamente una estacion
 }
 
 
@@ -139,7 +145,7 @@ void Linea::mostrarEstacionesYCostes()
     {
         cout << estaciones[i].getNombre() ;
 
-        // Solo muestra el coste si el índice es válido en tiempoEntreEstaciones
+        // Solo muestra el coste si el indice es válido en tiempoEntreEstaciones
         if (i < tiempoEntreEstaciones.obtenerTamaño()) {
             cout << " --- " << this->tiempoEntreEstaciones[i] << " --- ";
         }
@@ -151,4 +157,36 @@ void Linea::mostrarEstacionesYCostes()
 
 int Linea::numEstaciones(){
     return this->estaciones.obtenerTamaño();
+}
+
+time_t Linea::calcularTiempoDeLlegada(string estacionSalida, string estacionLlegada, time_t horaSalida) {
+    int indiceSalida = -1, indiceLlegada = -1;
+    for (int i = 0; i < estaciones.obtenerTamaño(); i++) {
+        if (estaciones[i].getNombre() == estacionSalida) {
+            indiceSalida = i;
+        }
+        if (estaciones[i].getNombre() == estacionLlegada) {
+            indiceLlegada = i;
+        }
+    }
+
+    if (indiceSalida == -1 || indiceLlegada == -1) {
+        cout << "Estacion no encontrada." << endl;
+        return -1;
+    }
+
+    if (indiceSalida == indiceLlegada) {
+        return horaSalida;
+    }
+
+    if (indiceSalida > indiceLlegada) {
+        swap(indiceSalida, indiceLlegada);
+    }
+
+    int tiempoTotal = 0;
+    for (int i = indiceSalida; i < indiceLlegada; i++) {
+        tiempoTotal += tiempoEntreEstaciones[i] * 60; // Convertir minutos a segundos
+    }
+
+    return horaSalida + tiempoTotal;
 }

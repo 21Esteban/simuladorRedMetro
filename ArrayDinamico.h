@@ -30,7 +30,7 @@ public:
     //metodos para añadir un elemento a mi arreglo dinamico
 
     void anadir(T elemento) {
-        //creamos un nuevo arreglo dinamico del tamaño  del arreglo que teniamos mas 1 para poder insetar el nuevo elemento
+        //creamos un nuevo arreglo dinamico del tamaño del arreglo que teniamos mas 1 para poder insetar el nuevo elemento
         T* newArray = new T[size + 1];
         //copiamos el arreglo viejo al nuevo
         for (int i = 0; i < size; i++) {
@@ -48,21 +48,21 @@ public:
     }
 
     void insertarEn(T elemento, int indice) {
-        // Verifica si el índice es válido
+        // Verifica si el indice es válido
         /*if (indice < 0 || indice > size) {
             cout << "Indice inválido. No se anadira el elemento." << endl;
             return;
         }*/
 
-        // Crea un nuevo arreglo dinámico del tamaño del arreglo que teníamos más 1 para poder insertar el nuevo elemento
+        // Crea un nuevo arreglo dinámico del tamaño del arreglo que teniamos más 1 para poder insertar el nuevo elemento
         T* newArray = new T[size + 1];
 
-        // Copia los elementos del arreglo viejo al nuevo hasta el índice
+        // Copia los elementos del arreglo viejo al nuevo hasta el indice
         for (int i = 0; i < indice; i++) {
             newArray[i] = arrayPtr[i];
         }
 
-        // Inserta el nuevo elemento en el índice
+        // Inserta el nuevo elemento en el indice
         newArray[indice] = elemento;
 
         // Copia el resto de los elementos del arreglo viejo al nuevo
@@ -135,8 +135,7 @@ public:
         return arrayPtr[index];
     }
 
-    //sobrecargamos el operador << para imprimir los objetos
-    // T operator<<()
+
 };
 
 //intente dividir esta class template en el archivo h y su implementacion en el cpp pero no encontre forma por unos errores que se me presentaba , entonces al leer este foro https://forum.qt.io/topic/77470/how-to-use-class-templates me decidi a implementarlo todo en el .h (cabecera)
